@@ -1,13 +1,13 @@
 ---
 layout: home
-title: Just the Class
+title: Running web-based experiments
 nav_exclude: true
 seo:
   type: Course
-  name: Just the Class
+  name: Running web-based experiments
 ---
 
-# {{ site.tagline }}
+# {{ site.title }}
 {: .mb-2 }
 {{ site.description }}
 {: .fs-6 .fw-300 }
