@@ -19,7 +19,7 @@ _(all times are PST)_
 1. 9:00-10:30: **Introduction**
   - General introduction
   - How do experiments on Mechanical Turk and Prolific work?
-  - What kind of experiments can be run on Prolific?
+  - What kind of experiments can be run on Mechanical Turk and Prolific?
   - Using GitHub for research projects
   - Preregistration and open science
 
