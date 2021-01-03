@@ -24,14 +24,10 @@ exclude: ["Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
 # Theme settings
 remote_theme: pmarsceill/just-the-docs@v0.3.3
 color_scheme: light
-search_enabled: true
-heading_anchors: true
+search_enabled: false
+heading_anchors: false
 permalink: pretty
 aux_links:
-  Kevin Lin:
-    - 'https://kevinl.info'
-  Just the Class on GitHub:
-    - 'https://github.com/kevinlin1/just-the-class'
 footer_content:
 
 # Collections for website data
