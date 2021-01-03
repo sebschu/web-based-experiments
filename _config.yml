@@ -13,12 +13,12 @@
 # you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Just the Class
-tagline: A Jekyll template for course websites
-description: A modern, highly customizable, responsive Jekyll template for course websites
-author: Kevin Lin
-baseurl: '/just-the-class' # the subpath of your site, e.g. /blog
-url: 'https://kevinl.info' # the base hostname & protocol for your site, e.g. http://example.com
+title: Running web-based experiments
+tagline: A minicourse held as part of the LSA 2021 Annual Meeting
+description: Researchers are increasingly turning to web-based methods for collecting experimental data. The COVID19 pandemic has further accelerated this trend. The goal of this mini-course is to give participants an introduction to web-based experimentation. In the first part of the course we will discuss advantages and disadvantages of running experiments in-lab vs online, including a comparison of different data collection platforms like Amazon Mechanical Turk and Prolific Academic. We will also provide an overview of open science best practices, including transparent data sharing and pre-registration. The remainder of the course will be hands-on: using a running example from the experimental pragmatics domain, participants will learn to use git/GitHub for project management; modify an existing experiment; post the experiment to a data collection platform; and conduct basic data visualization/analyses using R.
+author: Judith Degen and Sebastian Schuster
+baseurl: '/lsa-web-based-experiments' # the subpath of your site, e.g. /blog
+url: 'https://sebschu.github.io' # the base hostname & protocol for your site, e.g. http://example.com
 exclude: ["Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
 
 # Theme settings
