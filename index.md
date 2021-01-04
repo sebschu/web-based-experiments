@@ -12,6 +12,8 @@ seo:
 {{ site.description }}
 {: .fs-4 .fw-300 }
 
+**Instructors**: [Judith Degen](https://thegricean.github.io/) and [Sebastian Schuster](http://sebschu.com)
+
 ## Schedule
 
 _(all times are PST)_
