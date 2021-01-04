@@ -46,11 +46,41 @@ If you get an error message, make sure to install Git:
 
 If you don't already have a GitHub account,  [sign up for one](https://github.com/).
 
+## Prolific and Proliferate
 
-## Resources
+We will test experiments on (Prolific Academic)[https://prolific.co], a platform for recruiting participants from all around the world. For collecting data we will use [Proliferate](https://docs.proliferate.alps.science).
 
-Lacus viverra vitae congue eu. Suspendisse in est ante in nibh mauris cursus mattis. Nisl vel pretium lectus quam id leo in. Euismod lacinia at quis risus sed vulputate odio. Non enim praesent elementum facilisis. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer. Id interdum velit laoreet id donec ultrices tincidunt arcu. Urna molestie at elementum eu facilisis sed odio. Auctor urna nunc id cursus metus aliquam eleifend. Volutpat commodo sed egestas egestas fringilla phasellus. Libero nunc consequat interdum varius sit amet mattis. Imperdiet nulla malesuada pellentesque elit eget gravida cum sociis natoque. Tortor vitae purus faucibus ornare suspendisse. Auctor elit sed vulputate mi.
+1. [Sign up](https://app.prolific.co/register/researcher) for a Prolific account (if you don't have one already).
+2. [Sign up](https://proliferate.alps.science/admin/signup) for a Proliferate account.
+3. [Install the proliferate command line tool](https://docs.proliferate.alps.science/en/latest/cli/setup.html).
 
-## Assignments
+## RStudio
 
-Vehicula ipsum a arcu cursus vitae congue. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Risus sed vulputate odio ut enim blandit. Aliquam id diam maecenas ultricies mi eget. Id consectetur purus ut faucibus pulvinar elementum integer enim neque. Eget mi proin sed libero enim sed faucibus. Sem integer vitae justo eget magna fermentum iaculis. In mollis nunc sed id semper risus in. Sit amet risus nullam eget felis eget. Mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Nascetur ridiculus mus mauris vitae ultricies leo integer malesuada. Porta non pulvinar neque laoreet suspendisse interdum consectetur libero id. At varius vel pharetra vel turpis nunc eget. Scelerisque purus semper eget duis at tellus.
+Finally, for analyzing the data we will use R and the [tidyverse](https://tidyverse.org) library.
+
+1. [Install R](https://cran.rstudio.com/)
+2. [Install RStudio](https://www.rstudio.com/products/rstudio/download/)
+3. Install the `tidyverse` package: Lauch RStudio and run in the console: `install.packages("tidyverse")`  
+**(Note that quotes are needed when you install packages)**
+4. You need to load the package before you can use it:
+`library(tidyverse)`  
+**(Note that there are NO quotes when you load packages)**  
+If you see a list of attached packages (including `ggplot2`, `dplyr` etc) then everything is good. (Don't worry about the conflicts printed afterwards.)
+
+## Text editor
+
+We will edit the code for some experiments and it is generally much easier to edit code with a good editor that supports syntax highlighting of your code. In case you don't have an editor installed, [Atom](https://atom.io/) is a good free editor.
+
+## Checklist
+
+Here is a recap of all the things that should be set up before the course:
+
+* Python 3 is installed.
+* Git is installed
+* You have a GitHub account
+* You have a Prolific account
+* You have a Proliferate account
+* The Proliferate command-line utility is installed
+* R is installed
+* RStudio is installed
+* A text editor is installed
