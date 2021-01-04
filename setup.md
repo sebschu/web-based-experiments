@@ -48,15 +48,15 @@ If you don't already have a GitHub account,  [sign up for one](https://github.co
 
 ## Prolific and Proliferate
 
-We will test experiments on (Prolific Academic)[https://prolific.co], a platform for recruiting participants from all around the world. For collecting data we will use [Proliferate](https://docs.proliferate.alps.science).
+We will test experiments on [Prolific Academic](https://prolific.co), a platform for recruiting and paying participants. For collecting data, we will use [Proliferate](https://docs.proliferate.alps.science).
 
-1. [Sign up](https://app.prolific.co/register/researcher) for a Prolific account (if you don't have one already).
+1. [Sign up](https://app.prolific.co/register/researcher) for a Prolific account (if you don't already have one).
 2. [Sign up](https://proliferate.alps.science/admin/signup) for a Proliferate account.
 3. [Install the proliferate command line tool](https://docs.proliferate.alps.science/en/latest/cli/setup.html).
 
 ## RStudio
 
-Finally, for analyzing the data we will use R and the [tidyverse](https://tidyverse.org) library.
+For analyzing the data we will use R and the [tidyverse](https://tidyverse.org) library.
 
 1. [Install R](https://cran.rstudio.com/)
 2. [Install RStudio](https://www.rstudio.com/products/rstudio/download/)
@@ -71,6 +71,12 @@ If you see a list of attached packages (including `ggplot2`, `dplyr` etc) then e
 
 We will edit the code for some experiments and it is generally much easier to edit code with a good editor that supports syntax highlighting of your code. In case you don't have an editor installed, [Atom](https://atom.io/) is a good free editor.
 
+## OSF
+
+We will cover the theoretical background of pre-registration and pre-register the experiment that you'll test on the Open Science Foundation (OSF) platform.
+
+1. [Sign up](https://osf.io/register) for an OSF account (if you don't already have one).
+
 ## Checklist
 
 Here is a recap of all the things that should be set up before the course:
@@ -84,3 +90,4 @@ Here is a recap of all the things that should be set up before the course:
 * R is installed
 * RStudio is installed
 * A text editor is installed
+* You have an OSF account.
