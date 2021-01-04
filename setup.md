@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Setup
+nav_order: 1
 description: >-
     Setting up your computer in preparation for the minicourse.
 ---
