@@ -95,7 +95,7 @@ aggregate the data from your participants. You can also use it to montitor the p
 
 ## Testing the experiment
 
-1. Go back to the Prolific create form from step 1 and copy the Sandbox URL into the "Study Link" section on Prolific.
+1. Go back to the Prolific create form from step 1 and copy the **Sandbox** URL into the "Study Link" section on Prolific.
 
 2. Click "Preview" at the bottom of the create form, and in the popup window, click "Open study link in a new window". This should load your experiment in a new window.
 
@@ -107,14 +107,58 @@ aggregate the data from your participants. You can also use it to montitor the p
 proliferate getresults --sandbox <experiment_name>
 ```
 
-*Note*: The `--sandbox` flag causes proliferate to download the debugging results. To download the actual results, omit this parameter (see below).
+**Note**: The `--sandbox` flag causes proliferate to download the debugging results. To download the actual results, omit this parameter (see below).
 
 If your data was properly recorded, this should download several CSV files with your data. Make sure that all the data you need is present in the CSV files. If no data was recorded or some data is missing, check your experiment code and make sure that all data is recorded during the experiment and that all data is sent back to proliferate at the end of the experiment.
 
-## Posting the experiment
+If you want to read up on how proliferate turns the JSON data from your experiment into CSV files that can be easily analyzed in R or other statistical software, take a look at the [data processing section of the proliferate documentation](https://docs.proliferate.alps.science/en/latest/data.html).
 
-If you were actually running the experiment with real participants, 
+## Things you'd do if you actually ran the experiment
+
+For the purpose of this course, we'll stop here and not actually publish the experiment on Prolific. But if you were running an actual study and
+wanted to recruit participants from the Prolific pool, complete the following additional steps. (See also the [proliferate documentation](https://docs.proliferate.alps.science/en/latest/cli/managing-experiments.html))
 
 
-## Downloading the data
+### Posting the experiment
 
+If you were actually running the experiment with real participants, you would then publish it on Prolific.
+
+1. Go back to the Prolific create form from step 1 and copy the Study URL into the "Study Link" section on Prolific.
+
+2. Make sure that you select "I’ll use URL parameters" below the Study URL after you pasted the URL. This should append several parameters of the form `?PROLIFIC_PID=...` to your study URL. If these parameters are missing, select another option (e.g., "I’ll add a question in my study") and then click again on "I’ll use URL parameters".
+
+3. In the "Audience" section, select the pre-screening criteria that you want to use.
+
+4. In the "Study cost" section, choose the number of participants you would like to run, enter your estimate of how long the experiment will take, and how much participants get paid for participating in your experiment. In the US, you should pay participants at least $15/hour.
+
+5. Click "Publish" to publish your experiment.
+
+At this point, participants will be able to access your experiment. You can then monitor how many participants have completed or at least started your experiment, as described in the next section.
+
+### Monitoring the experiment
+
+You can monitor the progress of your experiment with the `info` command:
+
+```bash
+proliferate info <experiment_name>
+```
+
+See the [proliferate documentation](https://docs.proliferate.alps.science/en/latest/cli/managing-experiments.html#monitoring-an-experiment)
+for more information on how to interpret the output of t
+
+
+### Downloading the data
+
+You can download results using the `proliferate getresults` command:
+
+```bash
+proliferate getresults <experiment_name>
+```
+
+This will download data from all participants as CSV files.
+
+If you want to download the data from debugging the experiment with the Sandbox URL, add the `--sandbox` flag as we did above:
+
+```bash
+proliferate getresults  --sandbox <experiment_name>
+```
