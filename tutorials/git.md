@@ -27,5 +27,56 @@ This should redirect you to your newly created repository.
 
 ## Cloning the repository
 
+In order to edit, add or delete files, you'll have to create a copy of the repository on your computer (in Git terminology this is referred to as "cloning" a repository).
+
+1. Create a directory on your computer where you want to store all the files.
+
+2. On the homepage of your repository (something like https://github.com/<YOUR-USERNAME>/<YOUR-REPOSITORY-NAME>), click on the green "Code" button.
+  
+3. Copy the HTTPS URL to the clipboard.
+
+4. Open the Terminal (on MacOS/Linux) or the Anaconda Prompt (on Windows).
+
+5. Change into the directory from step 1 using the `cd` command. For example, if you have a directory called `lsa-minicourse` in your home directory, you can change into it by running 
+
+     ```bash
+     cd lsa-minicourse
+     ```
+   If you are using MacOS you can also type `cd ` into the Terminal and then drag the directory from Finder into the Terminal window to insert the full path
+   
+ 6. Clone the repository:
+ 
+     ```bash
+     git clone https://github.com/<YOUR-USERNAME>/<YOUR-REPOSITORY-NAME>.git
+     ```
+    
+    (paste the URL from the clipboard)
+    
+    This should download all the files from the repository into a subdirectory called `<YOUR-REPOSITORY-NAME>`.
+    
+ 7. Change into the directory of the cloned repository:
+ 
+     ```bash
+     cd <YOUR-REPOSITORY-NAME>
+     ```
+    
+ 8. List the contents of the repository
+ 
+ 
+     On MacOS/Linux:
+     ```bash
+     ls
+     ```
+     
+     On Windows:
+     ```bash
+     dir
+     ```
+ 
+ 
+     This should display the names of the folders in the repository and the file README.md
+     
+ 
+ 
 
 
