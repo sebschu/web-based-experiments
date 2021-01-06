@@ -107,8 +107,14 @@ aggregate the data from your participants. You can also use it to montitor the p
 proliferate getresults --sandbox <experiment_name>
 ```
 
+*Note*: The `--sandbox` flag causes proliferate to download the debugging results. To download the actual results, omit this parameter (see below).
+
+If your data was properly recorded, this should download several CSV files with your data. Make sure that all the data you need is present in the CSV files. If no data was recorded or some data is missing, check your experiment code and make sure that all data is recorded during the experiment and that all data is sent back to proliferate at the end of the experiment.
 
 ## Posting the experiment
+
+If you were actually running the experiment with real participants, 
+
 
 ## Downloading the data
 
