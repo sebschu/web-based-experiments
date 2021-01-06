@@ -53,11 +53,13 @@ aggregate the data from your participants. You can also use it to montitor the p
     ```json
     {
       "name": "Name of your experiment",
-      "notes": "Optional notes",
+      "notes": "Optional notes #lsa2021",
       "completion_URL": "The completion URL that you copied from Prolific",
       "experiment_URL": "The https:// URL to your experiment (this is the github.io URL from above)"
     }
     ```
+    
+   For this course, please include `#lsa2021` in the notes (this will be used behind the scenes to merge all the results from everyone, so that there is more data to analyze.)
 
 3. Create the experiment on proliferate: (Replace <experiment_name> with the label that you used in step 2.)
 
@@ -73,7 +75,7 @@ aggregate the data from your participants. You can also use it to montitor the p
     Loading info...
     --------------------------------------------------------------------------------
     Name: Name of your experiment.
-    Notes: Optional notes
+    Notes: Optional notes #lsa2021
     Created at: 2020-09-11 06:54 PM
     Prolific completion URL: https://app.prolific.co/submissions/complete?cc=0815ABCD
       (Participants will be redirected to this URL after completing the experiment.
@@ -92,6 +94,19 @@ aggregate the data from your participants. You can also use it to montitor the p
     ```
 
 ## Testing the experiment
+
+1. Go back to the Prolific create form from step 1 and copy the Sandbox URL into the "Study Link" section on Prolific.
+
+2. Click "Preview" at the bottom of the create form, and in the popup window, click "Open study link in a new window". This should load your experiment in a new window.
+
+3. Go through the entire experiment. At the end of it you should be redirected back to Prolific and it should say "Submission received".
+
+4. Make sure that your data was recorded by downloading the sandbox data. In the Terminal, run the following command:
+
+```bash
+proliferate getresults --sandbox <experiment_name>
+```
+
 
 ## Posting the experiment
 
