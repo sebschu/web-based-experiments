@@ -19,9 +19,8 @@ seo:
 _(all times are PST)_
 
 1. 9:00-10:30: **Introduction**
-  - General introduction
-  - How do experiments on Mechanical Turk and Prolific work?
-  - What kind of experiments can be run on Mechanical Turk and Prolific?
+  - How crowd-sourced experiments work? What kinds of experiments can be run online?
+  - Example study
   - Using GitHub for research projects
   - Preregistration and open science
 
@@ -29,8 +28,8 @@ _(all times are PST)_
 
 3. 10:40-12:30: **Tutorials**
   - [Git and GitHub](https://sebschu.github.io/lsa-web-based-experiments/tutorials/git/)
-  - Preregistering an experiment
   - [Modifying an existing experiment](https://sebschu.github.io/lsa-web-based-experiments/tutorials/experiment/)
+  - Preregistering an experiment  
 
 4. 12:30-1:00: **Lunch break**
 
