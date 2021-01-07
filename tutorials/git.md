@@ -7,6 +7,13 @@ nav_order: 1
 
 
 # Git Tutorial
+{:.no_toc}
+
+## Table of contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 In this tutorial, you'll create your own repository on GitHub, 
 make the repository available on your computer, edit and create some files,
