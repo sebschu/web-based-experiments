@@ -19,7 +19,8 @@ seo:
 _(all times are PST)_
 
 1. 9:00-10:30: **Introduction**
-  - How crowd-sourced experiments work? What kinds of experiments can be run online?
+  - How do crowd-sourced experiments work? 
+  - What kinds of experiments can be run online?
   - Example study
   - Using GitHub for research projects
   - Preregistration and open science
