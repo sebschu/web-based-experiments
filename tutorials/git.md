@@ -12,6 +12,12 @@ In this tutorial, you'll create your own repository on GitHub,
 make the repository available on your computer, edit and create some files,
 and commit and push the edited files to GitHub.
 
+## GitHub terminology overview
+
+![](https://magpie-ea.github.io/magpie-esslli-2019-course-material/site/script/pics/git_basic_notions.png)
+
+Visualization from [Open Science book](https://magpie-ea.github.io/magpie-esslli-2019-course-material/site/script/version-control-with-git.html) by Michael Franke. 
+
 ## Creating a project repository
 
 We'll create a tutorial from a template that already has a basic structure
