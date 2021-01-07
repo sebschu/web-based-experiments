@@ -83,9 +83,40 @@ In order to edit, add or delete files, you'll have to create a copy of the repos
  
  1. Add a `README.md` file to the `experiments` directory using a text editor. Add a description of the contents of the `experiment` directory to this file.
  
-   (This is totally optional, but if you want to format the README file, you can use [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).)
+    (This is totally optional, but if you want to format the README file, you can use [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).)
  
  2. Edit the `README.md` file in the `data` directory using a text editor. Add a description of the contents of the `data` directory to this file.
  
-
-
+ 3. To see which files have been added or changed in the repository, go back to ther Terminal/Prompt and run:
+ 
+    ```bash
+    git status
+    ```
+    
+    This should show that the file `data/README.md` has been modified and that the file `experiments/README.md` is untracked, which means it hasn't been added to the repository yet.
+    
+  4. To add all the modified and new files to the repository run
+  
+      ```bash
+      git add .
+      ```
+      
+      If you want to add individual files, you can also run `git add` with one or multiple file paths. For example:
+      
+      ```bash
+      git add data/README.md experiments/README.md
+      ```
+      
+      will also add both of these files.
+      
+      Running `git add` stages the files, which means they are ready to be permanently added to the history of the repository.
+      
+   5. To permanently add the files to the history of the repository, we'll have to "commit" them:
+   
+      ```bash
+      git commit -m "added and updated README files"
+      ```
+      
+      This will add all staged files to the history of the repository. The message "added and updated README files" is the commit message which is supposed to provide a summary of all the changes.
+      
+    
