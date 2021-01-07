@@ -68,16 +68,16 @@ So far, the experiment only has one target trial. Ideally, we'd like participant
 
 Scroll down to 
 
-```
+```js
 slides.trial = slide({
   name: "trial",
 ```
     
 This is where the definition of the target trial begins. You can see that the displayed stimulus is defined in `start`:
   
-```
+```js
 start: function() {
-  var stim = {
+var stim = {
         "TGrep": "37224:9",
         "Context": "Speaker A:  and, and i, you know, i still provide most of the things that  go on around the house.<p>Speaker B: right.<p>Speaker A: so, uh, yeah and for a while i was going to school too, and tha-, it was tough.<p>Speaker B: yeah,  i uh, i think that while it 's a good change for i think women to be able  to fulfill their potential in whatever they feel, you know, their expertise may be .<p>Speaker A: uh-huh.<p>Speaker B: uh-huh.<p>Speaker A: uh, i think sometimes other things suffer and tha-, i think it 's hard to find a balance there.<p>Speaker B: ",
         "EntireSentence": "but in some ways i think we are expected  to do it all.",
@@ -86,13 +86,13 @@ start: function() {
 ```
 In order to not just display this single stimulus, we need to pass the slide a stimulus list. Precisely such a list is stored in `js/stimuli.js`. Open that file and have a look at its contents. The list `all_stims` contains a list of 20 objects that all have the same structure as the individual `stim` defined above. Perfect! Let's pass this list to our main trial slide type to rotate through. Go back to the `experiment.js` file, comment out the above code block, and uncomment these two lines, which tell the slide to load the list `exp.stimuli` to rotate through, and to call each of the individual elements `stim`:
 
-```
+```js
 present: exp.stimuli,
 present_handle : function(stim) {
 ```
 But wait, where does `exp.stimuli` come from? Whenever you want to trace back the origins of a particular element, search for it. You should find it towards the bottom of the file inside a function called `init()`:
 
-```
+```js
 function init() {
 
   exp.trials = [];
@@ -109,7 +109,7 @@ Now that the mystery is solved, go ahead and save the file and reopen the html i
 
 **Pro tip 2:** It often helps to print out the value of a variable if you're not sure it's getting correctly assigned. For example, you might want to print out the contents of `exp.stimuli`, which you can do as follows:
 
-```
+```js
 console.log(exp.stimuli);
 ```
 
@@ -117,7 +117,7 @@ console.log(exp.stimuli);
 
 We often don't want each participant to complete the list of items in the same order, since a particular order might introduce a response bias, which will then be reflected in the data as a whole. A remedy for this is to randomize item order. You can do this very easily by applying the `_.shuffle()` function to the list of items. The most straightforward place to do this is where you first define `exp.stimuli`:
 
-```
+```js
 exp.stimuli = _.shuffle(stimuli);
 ```
 
@@ -132,7 +132,7 @@ If you run through the entire experiment, after the last page you'll see the inf
 
 What information is missing? Currently, only the item's unique corpus (tgrep) ID, the Likert scale response, and whther or not the participant considers the blue sentence to be a strange-sounding sentence are recorded. Let's make sure that trial number and the actual sentence that was displayed are also recorded. Within `slides.trial`, search for `log_responses`, the function that specifies which information is recorded. All this function does is add trial-level information as an object to the experiment-wide list `exp.data_trials`. 
 
-```
+```js
 log_responses: function() {
   exp.data_trials.push({
     "id": this.stim.TGrep,
@@ -152,7 +152,7 @@ Go ahead and uncomment the commented-out lines to record the additional informat
 You'll have noticed that the definition of each stimulus also contains information about the context that the target sentence occurred in. We might be interested in assessing whether the inclusion of context affects participants' inference ratings by displaying context for one group of participants and omitting it for another group. How do we implement this?
 
 Fist, include a placeholder for the context in `experiment.html` by uncommenting the following line:
-```
+```html
 <p class="case" style="text-align: left;"></p>
 ```
 
@@ -160,13 +160,13 @@ Now that the placeholder exists, fill it out in `experiment.js`. You need to mak
 
 Assign a condition to each participant at the beginning of the experiment, i.e., at the *end* of `experiment.js`, in `init() {...}`, by uncommenting the following line:
 
-```
+```js
 exp.condition = _.sample(["context", "no-context"]);
 ```
 
 Next, make sure that context is displayed/omitted contingent on the condition variable. Uncomment the following chunk of code in `slides.trial`:
 
-```
+```js
 if (exp.condition == "context") {
   // extract context data
   var contexthtml = stim.Context;
@@ -181,7 +181,7 @@ if (exp.condition == "context") {
 ```
 
 Finally, log the condition by adding the following information to `log_responses` in `slides.trial`:
-```
+```json
 "condition": exp.condition
 ```
 
