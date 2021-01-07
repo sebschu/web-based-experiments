@@ -89,7 +89,7 @@ In order to edit, add or delete files, you'll have to create a copy of the repos
  
      This should display the names of the folders in the repository and the file README.md
      
- ## Adding, editing and committing files
+## Adding, editing and committing files
  
  Now that you have a local copy of the repository, you can add and edit files with any program as you would
  do with a regular folder on your computer.
