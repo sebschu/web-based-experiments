@@ -140,3 +140,21 @@ git push origin master
 ```
 
 
+## Pulling updates from the server
+
+If a collaborator makes changes or you change files in the repository on another computer, you'll have to download the changes from GitHub using the `pull` command:
+
+```bash
+git pull
+```
+
+This will add any commits that you or someone else made on another computer to your local repository.
+
+## Further reading
+
+Git and GitHub support much more complex scenarios of collaboration than the basic use cases that we sketched here. 
+To learn more about Git and GitHub, take a look at the following resources:
+
+* [Git documentation](https://git-scm.com/docs)
+* [Git cheatsheet](https://training.github.com/downloads/github-git-cheat-sheet.pdf)
+
