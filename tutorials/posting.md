@@ -48,7 +48,7 @@ for recruiting participants.
 
 Keep this window open since you’ll need to go back to it later.
 
-## Setting up Experiment in Proliferate
+## Setting up an experiment in Proliferate
 
 Once you have a completion URL, you can set up the study in Proliferate. The main purpose of Proliferate is to record, store, and
 aggregate the data from your participants. You can also use it to montitor the progress of your experiment.
