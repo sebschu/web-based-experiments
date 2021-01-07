@@ -35,8 +35,8 @@ _(all times are PST)_
 4. 12:30-1:00: **Lunch break**
 
 5. 1:00-2:00: **Tutorials (continued)**
-  - Posting the experiment
-  - Testing the experiment
+  - [Posting the experiment](https://sebschu.github.io/lsa-web-based-experiments/tutorials/posting/)
+  - [Testing the experiment](https://sebschu.github.io/lsa-web-based-experiments/tutorials/posting/#testing-the-experiment)
   - Downloading and visualizing the data
  
  6. 2:00-2:15 **Final discussion and Q&A**
