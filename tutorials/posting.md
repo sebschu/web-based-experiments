@@ -30,7 +30,9 @@ After building your website (this may take up to a minute), your experiment shou
 
 For example, my experiment is available at:
 
-[https://sebschu.github.io/my-project/experiments/01_implicature_strength/experiment.html](https://sebschu.github.io/my-project/experiments/01_implicature_strength/experiment.html)
+[https://sebschu.github.io/my-project-solution/experiments/01_implicature_strength/experiment.html](https://sebschu.github.io/my-project-solution/experiments/01_implicature_strength/experiment.html)
+
+(Feel free to use my experiment if you are unsure whether your experiment is properly working.)
 
 ## Creating an experiment on Prolific
 
