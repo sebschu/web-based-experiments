@@ -44,7 +44,7 @@ In order to edit, add or delete files, you'll have to create a copy of the repos
 
 1. Create a directory on your computer where you want to store all the files.
 
-2. On the homepage of your repository (something like https://github.com/<YOUR-USERNAME>/<YOUR-REPOSITORY-NAME>), click on the green "Code" button.
+2. On the homepage of your repository (something like `https://github.com/<YOUR-USERNAME>/<YOUR-REPOSITORY-NAME>`), click on the green "Code" button.
   
 3. Copy the HTTPS URL to the clipboard.
 
