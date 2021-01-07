@@ -30,7 +30,7 @@ _(all times are PST)_
 3. 10:40-12:30: **Tutorials**
   - [Git and GitHub](https://sebschu.github.io/lsa-web-based-experiments/tutorials/git/)
   - [Modifying an existing experiment](https://sebschu.github.io/lsa-web-based-experiments/tutorials/experiment/)
-  - Preregistering an experiment  
+  - [Preregistering an experiment](https://sebschu.github.io/lsa-web-based-experiments/tutorials/preregistarion/) 
 
 4. 12:30-1:00: **Lunch break**
 
