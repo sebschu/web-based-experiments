@@ -8,7 +8,9 @@ nav_order: 3
 # Updating an Experiment Template
 {:.no_toc}
 
-INTRO, EXPLAINING GENERAL SETUP
+This tutorial walks through a version of the experiment reported in [Degen (2015)](https://semprag.org/index.php/sp/article/view/sp.8.11/pdf_8_111), in which inference strength ratings for 1362 naturally occurring sentences with "some" were collected on a 7-point Likert scale.
+
+Degen, J. (2015). Investigating the distribution of some (but not all) implicatures using corpora and web-based methods. *Semantics and Pragmatics*, 8, 11-1.
 
 ## Table of contents
 {: .no_toc .text-delta }
@@ -123,10 +125,10 @@ Done! Check whether it worked by running through the first few items of the expe
 
 ## Change which information is logged  
 
-If you run through the entire experiment, after the last page you'll see the information that will be submitted to the crowdsourcing platform. Run through a few trials of the experiment and then type `exp.go()` to jump to the end of the experiment, then click through the remaining buttons to see which information would have been submitted. You should see something like the following:
+If you run through the entire experiment, after the last page you'll see the information that will be submitted to the crowdsourcing platform. Run through a few trials of the experiment and then type `exp.go()` to jump to the end of the experiment, then click through the remaining buttons to see which information would have been submitted. You should see the information in a gray box.
 
 
-<img src="../assets/images/logged_info.png" alt="logged info" width="300"/>
+<!-- <img src="../assets/images/logged_info.png" alt="logged info" width="300"/> -->
 
 What information is missing? Currently, only the item's unique corpus (tgrep) ID, the Likert scale response, and whther or not the participant considers the blue sentence to be a strange-sounding sentence are recorded. Let's make sure that trial number and the actual sentence that was displayed are also recorded. Within `slides.trial`, search for `log_responses`, the function that specifies which information is recorded. All this function does is add trial-level information as an object to the experiment-wide list `exp.data_trials`. 
 
@@ -141,7 +143,7 @@ log_responses: function() {
   });
 ```
 
-Go ahead and uncomment the commented-out lines to record the additional information and test whether your changes registered. 
+Go ahead and uncomment the commented-out lines to record the additional information. Test whether your changes registered. 
 
 
 
@@ -180,8 +182,10 @@ if (exp.condition == "context") {
 
 Finally, log the condition by adding the following information to `log_responses` in `slides.trial`:
 ```
-"condition": exp.condition,
+"condition": exp.condition
 ```
 
 Done! Test extensively -- both that context is correctly displayed/omitted and that the condition information is indeed being recorded.
+
+If all changes registered, your experiment is now ready to be deployed!
 
