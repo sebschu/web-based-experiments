@@ -76,7 +76,16 @@ In order to edit, add or delete files, you'll have to create a copy of the repos
  
      This should display the names of the folders in the repository and the file README.md
      
+ ## Adding and editing files
  
+ Now that you have a local copy of the repository, you can add and edit files with any program as you would
+ do with a regular folder on your computer.
+ 
+ 1. Add a `README.md` file to the `experiments` directory using a text editor. Add a description of the contents of the `experiment` directory to this file.
+ 
+   (This is totally optional, but if you want to format the README file, you can use [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).)
+ 
+ 2. Edit the `README.md` file in the `data` directory using a text editor. Add a description of the contents of the `data` directory to this file.
  
 
 
