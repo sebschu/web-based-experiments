@@ -76,7 +76,7 @@ In order to edit, add or delete files, you'll have to create a copy of the repos
  
      This should display the names of the folders in the repository and the file README.md
      
- ## Adding and editing files
+ ## Adding, editing and committing files
  
  Now that you have a local copy of the repository, you can add and edit files with any program as you would
  do with a regular folder on your computer.
@@ -119,4 +119,24 @@ In order to edit, add or delete files, you'll have to create a copy of the repos
       
       This will add all staged files to the history of the repository. The message "added and updated README files" is the commit message which is supposed to provide a summary of all the changes.
       
-    
+## Pushing commits to GitHub
+
+Up until this point, all the changes are part of the local copy of the repository. To make them available online on GitHub, you'll have to push the commit:
+
+```bash
+git push origin master
+```
+
+This will send all the local changes to the GitHub server. If you go back to your repository on the GitHub website, you should now see all the changes you've made.
+
+## TL;DR
+
+To commit and push changes in a local repository, run:
+
+```bash
+git add .
+git commit -m "YOUR COMMIT MESSAGE"
+git push origin master
+```
+
+
