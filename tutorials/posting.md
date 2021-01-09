@@ -34,6 +34,10 @@ For example, my experiment is available at:
 
 (Feel free to use my experiment if you are unsure whether your experiment is properly working.)
 
+## Creating an experiment on Mechanical Turk
+
+*ADD CONTENT*
+
 ## Creating an experiment on Prolific
 
 To recruit and pay participants, you'll have to create a study on Prolific. This is the digital equivalent of posting a flyer
@@ -50,7 +54,7 @@ for recruiting participants.
 
 Keep this window open since you’ll need to go back to it later.
 
-## Setting up an experiment in Proliferate
+### Setting up an experiment in Proliferate
 
 Once you have a completion URL, you can set up the study in Proliferate. The main purpose of Proliferate is to record, store, and
 aggregate the data from your participants. You can also use it to montitor the progress of your experiment.
@@ -102,7 +106,7 @@ aggregate the data from your participants. You can also use it to montitor the p
     --------------------------------------------------------------------------------
     ```
 
-## Testing the experiment
+### Testing the experiment
 
 1. Go back to the Prolific create form from step 1 and copy the **Sandbox** URL into the "Study Link" section on Prolific.
 
@@ -122,13 +126,13 @@ If your data was properly recorded, this should download several CSV files with 
 
 If you want to read up on how proliferate turns the JSON data from your experiment into CSV files that can be easily analyzed in R or other statistical software, take a look at the [data processing section of the proliferate documentation](https://docs.proliferate.alps.science/en/latest/data.html).
 
-## Things you'd do if you actually ran the experiment
+### Things you'd do if you actually ran the experiment
 
 For the purpose of this course, we'll stop here and not actually publish the experiment on Prolific. But if you were running an actual study and
 wanted to recruit participants from the Prolific pool, complete the following additional steps. (See also the [proliferate documentation](https://docs.proliferate.alps.science/en/latest/cli/managing-experiments.html))
 
 
-### Posting the experiment
+#### Posting the experiment
 
 If you were actually running the experiment with real participants, you would then publish it on Prolific.
 
@@ -144,7 +148,7 @@ If you were actually running the experiment with real participants, you would th
 
 At this point, participants will be able to access your experiment. You can then monitor how many participants have completed or at least started your experiment, as described in the next section.
 
-### Monitoring the experiment
+#### Monitoring the experiment
 
 You can monitor the progress of your experiment with the `info` command:
 
@@ -156,7 +160,7 @@ See the [proliferate documentation](https://docs.proliferate.alps.science/en/lat
 for more information on how to interpret the output of t
 
 
-### Downloading the data
+#### Downloading the data
 
 You can download results using the `proliferate getresults` command:
 
