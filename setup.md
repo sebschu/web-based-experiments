@@ -47,7 +47,15 @@ If you get an error message, make sure to install Git:
 
 If you don't already have a GitHub account,  [sign up for one](https://github.com/).
 
-## Prolific and Proliferate
+## Platform-specific tools
+
+Depending on whether you want to set up an experiment on Prolific Academic or Amazon's Mechanical Turk, follow one or the other set of the following instructions.
+
+### Mechanical Turk and Submiterator
+
+*ADD CONTENT*
+
+### Prolific and Proliferate
 
 We will test experiments on [Prolific Academic](https://prolific.co), a platform for recruiting and paying participants. For collecting data, we will use [Proliferate](https://docs.proliferate.alps.science).
 
