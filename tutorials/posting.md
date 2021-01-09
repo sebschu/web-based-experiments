@@ -57,7 +57,7 @@ aggregate the data from your participants. You can also use it to montitor the p
 
 1. On your computer, create a folder in which you'll put the proliferate configuration file.
 
-2. In this folder, create a configuration file called <experiment_name>.config of the following format: (<experiment_name> can be any label for your experiment.)
+2. In this folder, create a configuration file called `<experiment_name>`.config of the following format: (`<experiment_name>` can be any label for your experiment.)
 
     ```json
     {
@@ -70,7 +70,7 @@ aggregate the data from your participants. You can also use it to montitor the p
     
    For this course, please include `#lsa2021` in the notes (this will be used behind the scenes to merge all the results from everyone, so that there is more data to analyze.)
 
-3. Create the experiment on proliferate: (Replace <experiment_name> with the label that you used in step 2.)
+3. Create the experiment on proliferate: (Replace `<experiment_name>` with the label that you used in step 2.)
 
     ```bash
     proliferate post <experiment_name>
