@@ -2,7 +2,7 @@
 layout: default
 title: Updating an Experiment Template
 parent: Tutorials
-nav_order: 3
+nav_order: 2
 ---
 
 # Updating an Experiment Template

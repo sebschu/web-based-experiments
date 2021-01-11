@@ -6,7 +6,7 @@ nav_order: 1
 ---
 
 
-# Git Tutorial
+# Git and GitHub
 {:.no_toc}
 
 ## Table of contents
