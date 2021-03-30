@@ -17,11 +17,6 @@ description: >-
 
 ---
 
-## Text editor
-
-We will edit the code for some experiments and it is generally much easier to edit code with a good editor that supports syntax highlighting of your code. In case you don't have an editor installed, [Atom](https://atom.io/) and [Sublime Text](https://www.sublimetext.com/) are good free editors.
-
-
 ## Python
 
 We will not directly program in Python, but some of the tools we use depend on it, so make sure you have installed Python **3**. We recommend using the [Anaconda](https://www.anaconda.com/products/individual) Python distribution.
@@ -52,19 +47,16 @@ If you get an error message, make sure to install Git:
 
 If you don't already have a GitHub account,  [sign up for one](https://github.com/).
 
-## OSF
-
-We will cover the theoretical background of pre-registration and pre-register the experiment that you'll test on the Open Science Foundation (OSF) platform.
-
-1. [Sign up](https://osf.io/register) for an OSF account (if you don't already have one).
-
 ## Platform-specific tools
 
 Depending on whether you want to set up an experiment on Prolific Academic or Amazon's Mechanical Turk, follow one or the other set of the following instructions.
 
 ### Mechanical Turk and Submiterator
 
-*ADD CONTENT*
+[Amazon Mechanical Turk](https://www.mturk.com/) is a crowdsourcing platform well suited for running web-based experiments. We use [Supersubmiterator](https://github.com/sebschu/Submiterator) to post experiments through Mechanical Turk and to download the data after participants complete the experiment.
+
+1. Follow [these instructions](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMechanicalTurkGettingStartedGuide/SetUp.html) to sign up for an Amazon Web Services (AWS) account and a requester account and to create an access key/secret pair on Amazon Mechanical Turk.
+2. Clone [Supersubmiterator](https://github.com/sebschu/Submiterator) and follow the setup instructions to install the `boto3` and `xmltodict` packages and your MTurk credentials (access key/secret pair).]
 
 ### Prolific and Proliferate
 
@@ -87,20 +79,27 @@ For analyzing the data we will use R and the [tidyverse](https://tidyverse.org) 
 **(Note that there are NO quotes when you load packages)**  
 If you see a list of attached packages (including `ggplot2`, `dplyr` etc) then everything is good. (Don't worry about the conflicts printed afterwards.)
 
+## Text editor
 
+We will edit the code for some experiments and it is generally much easier to edit code with a good editor that supports syntax highlighting of your code. In case you don't have an editor installed, [Atom](https://atom.io/) is a good free editor.
+
+## OSF
+
+We will cover the theoretical background of pre-registration and pre-register the experiment that you'll test on the Open Science Foundation (OSF) platform.
+
+1. [Sign up](https://osf.io/register) for an OSF account (if you don't already have one).
 
 ## Checklist
 
 Here is a recap of all the things that should be set up before the course:
 
-* A text editor is installed.
 * Python 3 is installed.
-* Git is installed.
-* You have a GitHub account.
+* Git is installed
+* You have a GitHub account
+* You have a Prolific account
+* You have a Proliferate account
+* The Proliferate command-line utility is installed
+* R is installed
+* RStudio is installed
+* A text editor is installed
 * You have an OSF account.
-* You have EITHER a Prolific and Proliferate account OR an Amazon Mechanical Turk requester account.
-* You have installed EITHER the Proliferate command-line utility (if working with Prolific) OR Submiterator (if working with MTurk).
-* R is installed.
-* RStudio is installed.
-
-
