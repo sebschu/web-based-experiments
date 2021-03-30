@@ -14,6 +14,8 @@ nav_order: 4
 1. TOC
 {:toc}
 
+Make sure you follow your institution or department's protocols and procedures before you post your experiment. For students taking LINGUIST 245B, find more information [here](https://linguistics.stanford.edu/resources/experimental-protocol).
+
 ## Publishing the experiment
 
 In order to run your experiment, it has to be available at a public HTTPS URL. One advantage of storing the experiment code on GitHub is that you can set up a respository to make your experiment publicly available.
@@ -36,13 +38,131 @@ For example, my experiment is available at:
 
 ## Creating an experiment on Mechanical Turk
 
-*ADD CONTENT*
+We use Submiterator to manage external HITS on Mechanical Turk. If you're planning to run multiple experiments, follow [the instructions here](https://github.com/thegricean/LINGUIST245B/tree/master/setup) to make Submiterator a system wide command. This way, you won't need to copy `supersubmiterator.py` every time you want to run an experiment and you can run commands from any directory. Remember that if you haven't made Submiterator a system wide command, you will also need to include `python supersubmiterator.py` at the beginning of your Submiterator commands.
+
+### Setting up an experiment using Submiterator
+
+1. On your computer, create a new folder inside the folder that contains your experiment (`../<NAME-OF-REPOSITORY>/experiments/01_implicature_strength`) and name it `mturk`. (This folder will contain all MTurk related files and can really live anywhere on your computer, but it's good practice to keep it close to the actual experiment you're running.) 
+
+2. Make sure you have a `.gitignore` file in in the root directory of your project (`<NAME-OF-REPOSITORY>`). `.gitignore` is a text file that tells Git which files or folders to ignore. We want to prevent the accidental uploading of confidential Worker IDs to the web so make sure this file includes `*mturk/` and other confidential files.
+
+3. Inside the `mturk` folder, create a configuration file called `<experiment_name>`.config of the following format: (`<experiment_name>` can be any label for your experiment)
+    
+    ```
+    {
+	"liveHIT":"no",
+	"title":"a title to show to turkers",
+	"description":"a description to show to turkers",
+	"experimentURL":"https://www.stanford.edu/~you/path/to/experiment.html",
+	"keywords":"language research stanford fun cognitive science university explanations",
+	"USonly?":"yes",
+	"minPercentPreviousHITsApproved":"95",
+	"minNumPreviousHITsApproved":"1000",
+	"frameheight":"650",
+	"reward":"0.00",
+	"numberofassignments":"10",
+	"assignmentsperhit": "9",
+	"assignmentduration":"1800",
+	"hitlifetime":"2592000",
+	"autoapprovaldelay":"60000",
+	"doesHaveQualification":"<ID_TO_MTURK_QUALIFICATION> or none",
+	"doesNotHaveQualification": "<ID_TO_MTURK_QUALIFICATION> or none"
+	}
+    
+    ```
+
+### Testing the experiment in the MTurk Sandbox
+
+1.	Change the configuration file to include the correct title and description of your experiment and the https:// URL to your experiment (this is the github.io URL from above). Make sure that "liveHIT" is set to "no". You can find more information about the options supported by Submiterator [here](https://github.com/sebschu/Submiterator).
+
+2. To post the experiment on MTurk Sandbox, in the terminal, run the following command: 
+(Replace `<experiment_name>` with the label that you used for your configuration file and make sure you run this command from the `mturk` folder that contains the configuration file.)
+
+	```
+	supersubmiterator posthit <experiment_name>
+	```
+This should return information about the experiment such as the following:
+
+	```
+	--------------------------------------------------------------------------------
+    Successfully created hit with 10 assignments!
+    Preview: https://workersandbox.mturk.com/mturk/preview?groupId=3DPZKFEUURGUPZ5ZFILM470JUA4I41
+   	--------------------------------------------------------------------------------
+	```
+
+3. Paste the outputted URL into your browser and complete the experiment. Time yourself to get an estimate for long the experiment takes. 
+
+4. To download your results, run the following command:
+
+	```
+	supersubmiterator getresults <experiment_name>
+	```
+This should return information about your data files such as the following:
+
+	```
+	--------------------------------------------------------------------------------
+    Completed assignment for HIT "3FHTJGYT8N01D1NB593XCA0K49IGPD": 1/3
+    --------------------------------------------------------------------------------
+    Writing results to perception-trials.csv ...
+    Writing results to perception-assignments.csv ...
+    Writing results to perception-system.csv ...
+    Writing results to perception-subject_information.csv ...
+    --------------------------------------------------------------------------------
+	```
+These data files should now be in your `mturk` folder.
+
+
+### Running the experiment
+
+Only post your pilot or main experiment once you're absolutely certain that your experiment runs and that you're recording all the information you need for your analysis. Remember to first load sufficient funds onto your MTurk requester account (there is 20% amazon fee).
+
+#### Posting the experiment
+
+1. In the configuration file change "liveHIT" to "yes", put the total number of participants you want to test and how much you 
+want to pay each participant. 
+
+2. Post the experiment on Mechanical Turk: (Replace `<experiment_name>` with the label that you used in step 3).
+	
+	```
+	supersubmiterator posthit <experiment_name>
+	```
+
+#### Monitoring the experiment
+
+[MTurk Manage](https://github.com/jtjacques/mturk-manage) is a great tool that you can use to monitor your experiment. 
+
+#### Downloading the data
+
+	You can download your results with the following command:
+
+	```
+	supersubmiterator posthit <experiment_name>
+	```
+	
+This should return information about your data files such as the following:
+
+	```
+	--------------------------------------------------------------------------------
+    Completed assignment for HIT "3FHTJGYT8N01D1NB593XCA0K49IGPD": 1/3
+    --------------------------------------------------------------------------------
+    Writing results to perception-trials.csv ...
+    Writing results to perception-assignments.csv ...
+    Writing results to perception-system.csv ...
+    Writing results to perception-subject_information.csv ...
+    --------------------------------------------------------------------------------
+	```
+These data files should now be in your `mturk` folder.
+
+#### MTurk related things to keep in mind
+
+- Post experiments on weekdays and early morning to avoid noisy data (before 12pm PST Monday-Thursday).
+- Sign up for accounts at Turkernation and/or Turkopticon to interact with Turkers or see how you are being rated.
+- Generally try to make Turkers comfortable: Include a progress bar in your experiment for a sense of how long the experiment will take. Pay fairly ($12-14/h). Include clear but concise instructions.
+- Monitor your email while HIT is running.
 
 ## Creating an experiment on Prolific
 
-To recruit and pay participants, you'll have to create a study on Prolific. This is the digital equivalent of posting a flyer
-for recruiting participants.
-
+To recruit and pay participants, you'll have to create a study on Prolific. This is the digital equivalent of posting a flyer for recruiting participants.
 
 1. [Create a study](https://app.prolific.co/studies/new) on Prolific.
 
@@ -56,8 +176,7 @@ Keep this window open since you’ll need to go back to it later.
 
 ### Setting up an experiment in Proliferate
 
-Once you have a completion URL, you can set up the study in Proliferate. The main purpose of Proliferate is to record, store, and
-aggregate the data from your participants. You can also use it to montitor the progress of your experiment.
+Once you have a completion URL, you can set up the study in Proliferate. The main purpose of Proliferate is to record, store, and aggregate the data from your participants. You can also use it to montitor the progress of your experiment.
 
 1. On your computer, create a folder in which you'll put the proliferate configuration file.
 
@@ -128,8 +247,7 @@ If you want to read up on how proliferate turns the JSON data from your experime
 
 ### Things you'd do if you actually ran the experiment
 
-For the purpose of this course, we'll stop here and not actually publish the experiment on Prolific. But if you were running an actual study and
-wanted to recruit participants from the Prolific pool, complete the following additional steps. (See also the [proliferate documentation](https://docs.proliferate.alps.science/en/latest/cli/managing-experiments.html))
+For the purpose of this course, we'll stop here and not actually publish the experiment on Prolific. But if you were running an actual study and wanted to recruit participants from the Prolific pool, complete the following additional steps. (See also the [proliferate documentation](https://docs.proliferate.alps.science/en/latest/cli/managing-experiments.html))
 
 
 #### Posting the experiment
@@ -156,8 +274,7 @@ You can monitor the progress of your experiment with the `info` command:
 proliferate info <experiment_name>
 ```
 
-See the [proliferate documentation](https://docs.proliferate.alps.science/en/latest/cli/managing-experiments.html#monitoring-an-experiment)
-for more information on how to interpret the output of t
+See the [proliferate documentation](https://docs.proliferate.alps.science/en/latest/cli/managing-experiments.html#monitoring-an-experiment) for more information on how to interpret the output.
 
 
 #### Downloading the data
@@ -175,3 +292,14 @@ If you want to download the data from debugging the experiment with the Sandbox 
 ```bash
 proliferate getresults  --sandbox <experiment_name>
 ```
+#### Prolific related things to keep in mind
+
+- Approval rate can be set under Custom prescreening > Participation on Prolific. (e.g. a 95% approval rate excluded ~6% of the pool)
+- To get Native US English speakers set:   
+	First Language --> English  
+	Country af Birth --> US    
+	Current Country of Residence --> US
+- For eye-tracking studies, the following parameters can be set:  
+	Vision (under General Health): Yes (to select for participants with normal/corrected-to-normal vision)  
+	Webcam (under Other): Yes   
+	Operating system (under Other): options are not very fine-grained, but could be useful to select only for participants using newer OSs (e.g. Windows 10 vs. prior releases) given processing demands of online eye-tracking software.
