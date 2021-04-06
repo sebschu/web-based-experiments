@@ -133,7 +133,7 @@ want to pay each participant.
 
 #### Downloading the data
 
-	You can download your results with the following command:
+You can download your results with the following command:
 
 	```
 	supersubmiterator posthit <experiment_name>

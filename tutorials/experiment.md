@@ -90,6 +90,9 @@ In order to not just display this single stimulus, we need to pass the slide a s
 present: exp.stimuli,
 present_handle : function(stim) {
 ```
+
+Next, we look inside the button function and comment out `exp.go();`. This call makes the code jump to the next slide type (`subj_info`) when the button is clicked. Before going to the next slide, we want to rotate through all the items in `exp.stimuli`. In order to to this, we uncomment `_stream.apply(this);`.
+
 But wait, where does `exp.stimuli` come from? Whenever you want to trace back the origins of a particular element, search for it. You should find it towards the bottom of the file inside a function called `init()`:
 
 ```js
