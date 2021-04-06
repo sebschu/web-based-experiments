@@ -84,10 +84,10 @@ We use Submiterator to manage external HITS on Mechanical Turk. If you're planni
 This should return information about the experiment such as the following:
 
 	```
-	--------------------------------------------------------------------------------
+	----------------------------------------------------------------------------
     Successfully created hit with 10 assignments!
     Preview: https://workersandbox.mturk.com/mturk/preview?groupId=3DPZKFEUURGUPZ5ZFILM470JUA4I41
-   	--------------------------------------------------------------------------------
+	----------------------------------------------------------------------------
 	```
 
 3. Paste the outputted URL into your browser and complete the experiment. Time yourself to get an estimate for long the experiment takes. 
@@ -133,24 +133,25 @@ want to pay each participant.
 
 #### Downloading the data
 
-You can download your results with the following command:
+You can download your results with the following command:  
 
-	```
-	supersubmiterator posthit <experiment_name>
-	```
+```bash
+supersubmiterator getresults <experiment_name>
+```
 	
 This should return information about your data files such as the following:
 
-	```
-	--------------------------------------------------------------------------------
-    Completed assignment for HIT "3FHTJGYT8N01D1NB593XCA0K49IGPD": 1/3
-    --------------------------------------------------------------------------------
-    Writing results to perception-trials.csv ...
-    Writing results to perception-assignments.csv ...
-    Writing results to perception-system.csv ...
-    Writing results to perception-subject_information.csv ...
-    --------------------------------------------------------------------------------
-	```
+```bash
+----------------------------------------------------------------------------
+Completed assignment for HIT "3FHTJGYT8N01D1NB593XCA0K49IGPD": 1/3
+----------------------------------------------------------------------------
+Writing results to perception-trials.csv ...
+Writing results to perception-assignments.csv ...
+Writing results to perception-system.csv ...
+Writing results to perception-subject_information.csv ...
+----------------------------------------------------------------------------
+```
+	
 These data files should now be in your `mturk` folder.
 
 #### MTurk related things to keep in mind
