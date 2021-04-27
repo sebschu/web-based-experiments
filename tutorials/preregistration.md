@@ -8,7 +8,7 @@ nav_order: 3
 # Preregistration
 {:.no_toc}
 
-In this tutorial, you'll preregister an experiment on the Open Science Foundation (OSF) platform.
+In this tutorial, you'll learn about the theoretical background behind preregistrations and preregister an experiment on the Open Science Foundation (OSF) platform.
 
 
 ## Table of contents
@@ -17,6 +17,9 @@ In this tutorial, you'll preregister an experiment on the Open Science Foundatio
 1. TOC
 {:toc}
 
+## Theoretical background
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OA_-xXc_KBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Create a project on OSF
 
