@@ -21,6 +21,8 @@ In this tutorial, you'll learn about the theoretical background behind preregist
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/OA_-xXc_KBU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+[Download slides](/slides/preregistration.pdf)
+
 ## Create a project on OSF
 
 Before you can preregister an individual experiment, you'll have to create a project on OSF. A project
