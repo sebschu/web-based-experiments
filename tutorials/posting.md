@@ -42,12 +42,12 @@ We use Submiterator to manage external HITS on Mechanical Turk. If you're planni
 
 ### Setting up an experiment using Submiterator
 
-1. On your computer, create a new folder inside the folder that contains your experiment (`../<NAME-OF-REPOSITORY>/experiments/01_implicature_strength`) and name it `mturk`. (This folder will contain all MTurk related files and can really live anywhere on your computer, but it's good practice to keep it close to the actual experiment you're running.) 
+1. On your computer, create a new folder inside the folder that contains your experiment (`../<NAME-OF-REPOSITORY>/experiments/01_implicature_strength`) and name it `mturk`. (This folder will contain all MTurk related files and can really live anywhere on your computer, but it's good practice to keep it close to the actual experiment you're running.)
 
 2. Make sure you have a `.gitignore` file in in the root directory of your project (`<NAME-OF-REPOSITORY>`). `.gitignore` is a text file that tells Git which files or folders to ignore. We want to prevent the accidental uploading of confidential Worker IDs to the web so make sure this file includes `*mturk/` and other confidential files.
 
 3. Inside the `mturk` folder, create a configuration file called `<experiment_name>`.config of the following format: (`<experiment_name>` can be any label for your experiment)
-    
+
     ```
     {
 	"liveHIT":"no",
@@ -68,14 +68,14 @@ We use Submiterator to manage external HITS on Mechanical Turk. If you're planni
 	"doesHaveQualification":"<ID_TO_MTURK_QUALIFICATION> or none",
 	"doesNotHaveQualification": "<ID_TO_MTURK_QUALIFICATION> or none"
 	}
-    
+
     ```
 
 ### Testing the experiment in the MTurk Sandbox
 
 1.	Change the configuration file to include the correct title and description of your experiment and the https:// URL to your experiment (this is the github.io URL from above). Make sure that "liveHIT" is set to "no". You can find more information about the options supported by Submiterator [here](https://github.com/sebschu/Submiterator).
 
-2. To post the experiment on MTurk Sandbox, in the terminal, run the following command: 
+2. To post the experiment on MTurk Sandbox, in the terminal, run the following command:
 (Replace `<experiment_name>` with the label that you used for your configuration file and make sure you run this command from the `mturk` folder that contains the configuration file.)
 
 	```
@@ -90,7 +90,7 @@ This should return information about the experiment such as the following:
 	----------------------------------------------------------------------------
 	```
 
-3. Paste the outputted URL into your browser and complete the experiment. Time yourself to get an estimate for long the experiment takes. 
+3. Paste the outputted URL into your browser and complete the experiment. Time yourself to get an estimate for long the experiment takes.
 
 4. To download your results, run the following command:
 
@@ -118,18 +118,18 @@ Only post your pilot or main experiment once you're absolutely certain that your
 
 #### Posting the experiment
 
-1. In the configuration file change "liveHIT" to "yes", put the total number of participants you want to test and how much you 
-want to pay each participant. 
+1. In the configuration file change "liveHIT" to "yes", put the total number of participants you want to test and how much you
+want to pay each participant.
 
 2. Post the experiment on Mechanical Turk: (Replace `<experiment_name>` with the label that you used in step 3).
-	
+
 	```
 	supersubmiterator posthit <experiment_name>
 	```
 
 #### Monitoring the experiment
 
-[MTurk Manage](https://github.com/jtjacques/mturk-manage) is a great tool that you can use to monitor your experiment. 
+[MTurk Manage](https://github.com/jtjacques/mturk-manage) is a great tool that you can use to monitor your experiment.
 
 #### Downloading the data
 
@@ -138,7 +138,7 @@ You can download your results with the following command:
 ```bash
 supersubmiterator getresults <experiment_name>
 ```
-	
+
 This should return information about your data files such as the following:
 
 ```bash
@@ -151,7 +151,7 @@ Writing results to perception-system.csv ...
 Writing results to perception-subject_information.csv ...
 ----------------------------------------------------------------------------
 ```
-	
+
 These data files should now be in your `mturk` folder.
 
 #### MTurk related things to keep in mind
@@ -169,7 +169,7 @@ To recruit and pay participants, you'll have to create a study on Prolific. This
 
 2. Fill in the title and the description of the study in the "Study Details" section (this will be visible to your participants).
 
-3. In the "Study Completion" section, select "I'll redirect them using a URL" 
+3. In the "Study Completion" section, select "I'll redirect them using a URL"
 
 4. Copy the completion URL that appears.
 
@@ -191,10 +191,29 @@ Once you have a completion URL, you can set up the study in Proliferate. The mai
       "experiment_URL": "The https:// URL to your experiment (this is the github.io URL from above)"
     }
     ```
-    
+
    For this course, please include `#lsa2021` in the notes (this will be used behind the scenes to merge all the results from everyone, so that there is more data to analyze.)
 
-3. Create the experiment on proliferate: (Replace `<experiment_name>` with the label that you used in step 2.)
+   If you are running an experiment with multiple conditions, create a configuration
+   file of the following format:
+
+   ```json
+   {
+     "name": "Name of your experiment",
+     "notes": "Optional notes",
+     "completion_URL": "The completion URL that you copied from Prolific",
+     "conditions": [
+       {
+         "name": "name of your first condition",
+         "experiment_URL": "The https:// URL to your experiment  for this condition (this is the github.io URL from above)",
+         "participants": "number of participants you want to run in this condition, this number should be written without quotes"
+       },
+       {"repeat as many times as conditions you have"}
+     ]
+   }
+   ```
+
+3. Create the experiment on proliferate: navigate to the folder from step 2 using the terminal and run the following command in the terminal (replacing `<experiment_name>` with the label that you used in step 2.)
 
     ```bash
     proliferate post <experiment_name>
@@ -225,7 +244,7 @@ Once you have a completion URL, you can set up the study in Proliferate. The mai
     Experiment location: The https:// URL to your experiment
     --------------------------------------------------------------------------------
     ```
-
+    If your experiment has multiple conditions, you will also see a list of conditions and sandbox URLS for each condition when you run the command above.
 ### Testing the experiment
 
 1. Go back to the Prolific create form from step 1 and copy the **Sandbox** URL into the "Study Link" section on Prolific.
@@ -243,6 +262,10 @@ proliferate getresults --sandbox <experiment_name>
 **Note**: The `--sandbox` flag causes proliferate to download the debugging results. To download the actual results, omit this parameter (see below).
 
 If your data was properly recorded, this should download several CSV files with your data. Make sure that all the data you need is present in the CSV files. If no data was recorded or some data is missing, check your experiment code and make sure that all data is recorded during the experiment and that all data is sent back to proliferate at the end of the experiment.
+
+If you are running an experiment with multiple conditions and want to test all the conditions or specific conditions you can either:
+1. Follow the instructions above using the **Sandbox** URL for the whole experiment (the first **Sandbox** URL that comes up from step 3 in the **Setting up an experiment in Proliferate** section) and click "Preview" (step 2) multiple times. You will be assigned to a different condition each time.
+2. Follow the instructions above, but instead of using the first **Sandbox** URL that comes up from step 3 in the **Setting up an experiment in Proliferate section**, use the **Sandbox** URLs underneath each condition name. Each of these Sandbox URL's will allow you individually test a single condition.
 
 If you want to read up on how proliferate turns the JSON data from your experiment into CSV files that can be easily analyzed in R or other statistical software, take a look at the [data processing section of the proliferate documentation](https://docs.proliferate.alps.science/en/latest/data.html).
 
@@ -287,6 +310,8 @@ proliferate getresults <experiment_name>
 ```
 
 This will download data from all participants as CSV files.
+
+Please beware that some of the csv files (files ending with -workerids.csv) contain identifying information about participants and should be treated with caution. 
 
 If you want to download the data from debugging the experiment with the Sandbox URL, add the `--sandbox` flag as we did above:
 
