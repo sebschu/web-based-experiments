@@ -5,8 +5,9 @@ parent: Tutorials
 nav_order: 6
 ---
 
+# jsPsych
 
-###### Table of contents
+## Table of contents
 1. [Getting started](#getting-started)
     1. [What is jsPsych?](#what-is-jspsych)
     2. [Setting up a directory](#setting-up-a-directory)
@@ -28,14 +29,14 @@ nav_order: 6
         11. [Wrapping up](#wrapping-up)
 
 
-### Getting started
+## Getting started
 
-#### What is jsPsych?
+### What is jsPsych?
 <a href="https://www.jspsych.org/7.3/" target="_blank">JsPsych</a> is a JavaScript library that can be used to simplify the process of creating behavioral experiments as web apps. You'll still need knowledge of JavaScript, HTML, and CSS, and there's no GUI (i.e. you can't drag and drop trials into place), but a lot of the basic procedures that make up behavioral experiments can be handled with just a few lines of code. Each of these procedures is handled by a jsPsych *plugin*, the base code for which can be imported directly into your experiment.
 
 JsPsych is open source and actively developed on <a href="https://github.com/jspsych/jsPsych" target="_blank">GitHub</a>. If you use jsPsych for research that you're planning to publish, you can cite <a href="https://link.springer.com/article/10.3758/s13428-014-0458-y" target="_blank">this paper</a> (deLeeuw, 2015).
 
-#### Setting up a directory
+### Setting up a directory
 On the 245B GitHub page, you can download code for a simple, fully functional jsPsych experiment, but let's a good idea to build that from scratch here in order to understand the logic of a jsPsych experiment. 
 
 To get started, you need a directory where all the experiment files will live. To run an experiment, you minimally need an `.html` file and a `.js` file. Although not strictly necessary, you will also often find that it makes sense to have a `.css` file so you can easily customize styling and a second `.js` file so that you can write helper functions without cluttering the file containing your main experiment logic. 
@@ -51,7 +52,7 @@ So, open up your terminal, navigate to the parent directory where you want your 
 
 For good measure, you can now type `ls` to make sure all the files you just generated actually exist. Nice. Now open up that directory in your text editor (VS Code, Sublime, Atom, etc.)
 
-#### Basic HTML setup
+### Basic HTML setup
 The first thing you need to do is write a basic HTML file. This file is what you open in the web browser to test your experiment. It's sort of like the home base. An HTML file minimally includes a "doctype" declaration, an `<html>` tag, a `<head>` tag, and a `<title>` tag. We tell the HTML file which JS scripts to execute with `<script>` tags, and link stylesheets with `<link>` tags. In this case, a good starting place for the HTML file would be something like: 
 
 ``` html
@@ -75,7 +76,7 @@ Now you can open up this file in Chrome to start testing your experiment. (Or wh
 
 
 
-#### Basic jsPsych integration
+### Basic jsPsych integration
 There are three ways that we can get our HTML file to incorporate elements of the jsPsych library: linking to CDN-hosted files, hosting the files locally, or using Node and NPM. (If you're pretty familiar with web development, you're welcome to use this third option, but we won't get into it here.) The most straightforward option is to include a call to an externally CDN-hosted version of jsPsych. To do that, you would add these lines to the head of your HTML document:
 
 ``` html
@@ -123,9 +124,9 @@ jsPsych.run(timeline)
 
 The next step, which will take the bulk of your time, is to populate the timeline.
 
-### Creating the experiment logic
+## Creating the experiment logic
 
-#### Plugins
+### Plugins
 As mentioned above, each chunk of the procedure is created with a jsPsych plugin. See <a href="https://www.jspsych.org/7.3/plugins/list-of-plugins/">this link</a> for a complete list of available plugins along with a short description of what each does. Helpfully, each plugin has a relatively detailed manual page, including information about what the plugin does, what information needs to be supplied for the plugin to work, default values for unspecified parameters, the link to the CDN-hosted version, examples of the plugin in action, etc. For example, here's the manual page for the <a href = "https://www.jspsych.org/7.3/plugins/audio-keyboard-response/">audio keyboard response</a> plugin. These manual pages will be *very useful* in developing experiments.
 
 To use a plugin to create a chunk of experiment logic, just create an object with the plugin's required parameters specified and assign that to a variable. There is always a parameter called `type`, where the name of the plugin goes. After we generate a trial, it must be pushed to the timeline in order to be included in the experiment. This will look like:
@@ -149,8 +150,8 @@ Each plugin you use needs to be linked to the `head` of your HTML file. Do this 
 <script src="jspsych/dist/plugin-audio-keyboard-response.js"></script>
 ```
 
-#### Adding trials
-##### Consent and instructions
+### Adding trials
+#### Consent and instructions
 Now that we understand how plugins work, we can start actually adding trials to the experiment. Generally, the first thing a participant will see is a consent form. A good candidate plugin for this trial would be "html button response", which serves up some text in html form and then allows participants to proceed by clicking a button. Here's the <a href="https://www.jspsych.org/7.3/plugins/html-button-response/">documentation</a>. 
 
 First thing to do, as always, is make sure to link the appropriate .js file in the head of the html document if it's not there already. In this case:
@@ -211,7 +212,7 @@ const jsPsych = initJsPsych({
 
 Now when you finish the experiment, you'll see a page showing everything that's getting recorded.
 
-##### Main experiment
+#### Main experiment
 Now we can get to the meat of the experiment. In each trial, we need to serve up some audio and then collect a keyboard response from a participant. A good fit for this, naturally, is the plugin <a href="https://www.jspsych.org/7.3/plugins/audio-keyboard-response/">audio keyboard response</a>. Add it to your html file:
 
 ``` html
@@ -262,7 +263,7 @@ const trial_1 = {
 
 Note that even with this parameter specified, the trial will end automatically when a response is made. That's because the plugin also has a parameter called `response_ends_trial` which is by default set to `true`. If a trial is behaving in a way you didn't expect, check the documentation and see if there are any parameters with default values. 
 
-##### Adding custom CSS
+#### Adding custom CSS
 We might also want participants to have a visual prompt so they don't forget which key is associated with which response. The parameter `prompt` takes an html string and displays that in the window. Here, we should remind participants that a response of 'd' means 'new' and 'k' means old. The simplest was to do this would be to just add raw text saying as much:
 
 ``` javascript
@@ -318,7 +319,7 @@ We won't get into details of how to use CSS right now, but go ahead and add this
 
 Now, when you refresh the experiment, the visual prompt should be presented in a slightly more pleasant way! You can use your linked to stylesheet to alter the appearance of your experiment in nearly limitless ways. 
 
-##### The `data` object 
+#### The `data` object 
 
 Now, back to the .js file where we're building our first trial. Each jsPsych plugin automatically records certain bits of data. Some of these are shared across plugins and some are unique to particular plugins. Both lists can be found un plugins' documentation pages. Typically, it will also be important to record data that is not included by default, for example condition codes, correct responses for individual trials, etc. 
 
@@ -340,7 +341,7 @@ const trial_1 = {
 
 Now if we click through the experiment and look at the data page at the very end, there will be a new column added called `correct`. Note that if you add a parameter like that outside of the `data` object, it won't break the experiment, but it also won't get recorded. 
 
-##### Adding dynamic functionality
+#### Adding dynamic functionality
 
 Sometimes we want to include custom behavior that's not supported out of the box. Most trials can take functions as arguments. A good way to demonstrate this is with the `on_finish` parameter, which specifies some kind of behavior to be executed when a trial finishes. See <a href="https://www.jspsych.org/7.3/overview/dynamic-parameters/">this page</a> for more info on how this works. 
 
@@ -373,7 +374,7 @@ const trial_1 = {
 
 Now our output data will have a column called `result` that includes these possible cases. 
 
-##### Linking custom JavaScript
+#### Linking custom JavaScript
 Our trial is starting to look pretty good, but having all that JavaScript in the `on_finish` parameter make make the file difficult to read as we start adding more trials. One solution here would be to create a separate .js file where we define this behavior as a helper function. Create a file called `util.js` and then link it to your html file. Make sure to do this *before* your `experiment.js` file. At this point, your whole html file will look something like:
 
 ``` html
@@ -437,7 +438,7 @@ const trial_1 = {
 
 Using helper functions in a separate .js file will help enormously to keep your code clean and readable. 
 
-##### Repeating trials
+#### Repeating trials
 At this point, our trial is looking pretty good, so let's add some more. The most straightforward way to do this is just to copy and paste your trial object and change the necessary parameters. Let's create an experiment with four trials, where each of our audio files is heard twice. To do that, we can just change the `stimulus` path and the `correct` response. Everything else can stay the same. 
 
 ``` javascript
@@ -533,7 +534,7 @@ timeline.push(trials)
 
 Using nested variables has the added benefit of making trial order <a href="https://www.jspsych.org/7.3/overview/timeline/#random-orders-of-trials">randomization</a> a bit simpler. For the rest of this tutorial though, let's stick with the clunky version. 
 
-##### Adding trials of a different type
+#### Adding trials of a different type
 The current four-trial experiment is working well, but maybe we want to add some kind of inter-trial interval to keep participants from feeling overburdened. To do this, we can define one single trial that does nothing, accepts no response, and ends after 1 second no matter what. For example:
 
 ``` javascript
@@ -557,7 +558,7 @@ for (let i = 0; i < trial_array.length; i++) {
 
 (If you're working with nested timelines see <a href="https://www.jspsych.org/7.3/overview/timeline/#timeline-variables">timeline variables</a> for a way to do this with fewer lines of code.)
 
-##### Preloading media
+#### Preloading media
 In default javascript behavior, the stimulus file associated with each trial is loaded to the user's local memory when it's called up. This introduces a delay that can negatively affect the flow of the experiment, the duration of the ITI, and RT data! A sloution to this problem is to preload all the necessary media *before* the procedure begins. This will be particularly important if you're working with large files like audio or images. 
 
 In jsPsych, there's a separate plugin to handle preloading media, called <a href="https://www.jspsych.org/7.3/plugins/preload/">preload</a>. Add that plugin to the head of your html file:
@@ -579,7 +580,7 @@ timeline.unshift(preload_trial);
 ```
 
 
-##### Surveys
+#### Surveys
 
 That should just about do it for the main body of our experiment. It's generally a good idea though to collect a little bit of demographic information from participants. Let's add a trial to let them know that the experiment is done and ask them to fill out the questionnaire. 
 
@@ -744,7 +745,7 @@ const questionnaire = {
 timeline.push(questionnaire)
 ```
 
-##### Wrapping up
+#### Wrapping up
 
 The very last thing to do is to thank the participant for their time! Just add one more trial.
 
