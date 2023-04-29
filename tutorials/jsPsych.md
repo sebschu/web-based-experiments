@@ -7,6 +7,7 @@ nav_order: 6
 
 # jsPsych
 
+
 ## Table of contents
 1. [Getting started](#getting-started)
     1. [What is jsPsych?](#what-is-jspsych)
@@ -27,6 +28,7 @@ nav_order: 6
         9. [Preloading media](#preloading-media)
         10. [Surveys](#surveys)
         11. [Wrapping up](#wrapping-up)
+3. [Creating an experiment at scale](#creating-an-experiment-at-scale)
 
 
 ## Getting started
@@ -507,32 +509,7 @@ timeline.push(trial_1, trial_2, trial_3, trial_4);
 
 This will work, but it will also start to get a bit clunky. One way around this may be to define all these objects in a separate file (something like `trials.js`) and then just use the `experiment.js` file to push the objects you created externally. 
 
-Another method would be to use <a href="https://www.jspsych.org/7.3/overview/timeline/#nested-timelines">nested timelines</a> and <a href="https://www.jspsych.org/7.3/overview/timeline/#timeline-variables">timeline variables</a>. These mechanisms allow you to specify the trials' consistent parameters once, and then specify only those things that change separately. Here, that would look like:
-
-``` javascript 
-const trials = {
-    type: jsPsychAudioKeyboardResponse,
-    choices: ['d', 'k'],
-    response_allowed_while_playing: false,
-    trial_duration: 4000,
-    prompt: `<div class=\"option_container\"><div class=\"option\">NEW<br><br><b>D</b></div><div class=\"option\">OLD<br><br><b>K</b></div></div>`,
-    data: {
-        correct: "NEW"
-    },
-    on_finish: function(data) {
-        evaluate_response(data);
-    },
-    timeline: [
-        {stimulus: 'audio/Violin.wav', data: {correct: "NEW"}},
-        {stimulus: 'audio/Bologna.wav', data: {correct: "NEW"}},
-        {stimulus: 'audio/Violin.wav', data: {correct: "OLD"}},
-        {stimulus: 'audio/Bologna.wav', data: {correct: "OLD"}}
-    ]
-}
-timeline.push(trials)
-```
-
-Using nested variables has the added benefit of making trial order <a href="https://www.jspsych.org/7.3/overview/timeline/#random-orders-of-trials">randomization</a> a bit simpler. For the rest of this tutorial though, let's stick with the clunky version. 
+For the rest of this tutorial though, let's stick with the clunky version. 
 
 #### Adding trials of a different type
 The current four-trial experiment is working well, but maybe we want to add some kind of inter-trial interval to keep participants from feeling overburdened. To do this, we can define one single trial that does nothing, accepts no response, and ends after 1 second no matter what. For example:
@@ -758,3 +735,79 @@ const thanks = {
 ```
 
 Congratulations! You just made your first fully functional experiment with jsPsych! However, we still need to add some tools to integrate with Prolific and to make sure your data winds up in a database rather than disappearing into the ether. More on that next week.
+
+## Creating an experiment at scale
+
+### Repeating procedures
+Above, we defined the experiment logic by hard coding four trials and pushing them to the timeline. Because full-size experiments often include hundreds of trials, this method doesn't scale very well. A more dynamic method to build up the logic would be to use <a href="https://www.jspsych.org/7.3/overview/timeline/#nested-timelines">nested timelines</a> and <a href="https://www.jspsych.org/7.3/overview/timeline/#timeline-variables">timeline variables</a>. These mechanisms allow you to specify the trials' consistent parameters once, and then specify only those things that change separately. 
+
+If we wanted to just create a loop of our udio trial, we would specify the unique attributes of each trial in an array of objects assigned to the `timeline` parameter. *N.B. This is not the same `timeline` that is holding the array of trials; it just shares a name!* After you've defined the `trials` object with the nested timeline, you can push it to your larger timeline array. 
+
+
+
+``` javascript 
+const trials = {
+    type: jsPsychAudioKeyboardResponse,
+    choices: ['d', 'k'],
+    response_allowed_while_playing: false,
+    trial_duration: 4000,
+    prompt: `<div class=\"option_container\"><div class=\"option\">NEW<br><br><b>D</b></div><div class=\"option\">OLD<br><br><b>K</b></div></div>`,
+    on_finish: function(data) {
+        evaluate_response(data);
+    },
+    timeline: [
+        {stimulus: 'audio/Violin.wav', data: {correct: "NEW"}},
+        {stimulus: 'audio/Bologna.wav', data: {correct: "NEW"}},
+        {stimulus: 'audio/Violin.wav', data: {correct: "OLD"}},
+        {stimulus: 'audio/Bologna.wav', data: {correct: "OLD"}}
+    ]
+}
+timeline.push(trials)
+```
+
+But before, we were alternating between audio response trials and an ITI, rather than simply looping one type of trial. To accomplish something like this, we can combine **nested timelines** and **timeline variables**. 
+
+In the `trials` object, a parameter called `timeline` will hold an array of objects defining small procedures for the experiment to loop through. In this case, that's a audio keyboard response trial followed by a blank trial. The parameter `timeline_variables`, meanwhile, is given an arrray of objects just like the one we used above. The program needs to know which parts of those objects to insert where in the timeline loop. We can specify this by using the `timelineVariable` method, which will be given an argument corresponding to the name of the parameter you defined in the `timeline_variables` array. For example, the `stimulus` parameter is now specified as `jsPsych.timelineVariable('stimulus')`, and the `data` parameter is set to `jsPsych.timelineVariable('data')`.  The name serving as the argument here should match the name in the object below. 
+
+Using nested timelines and timeline variables has the added benefit of making trial order <a href="https://www.jspsych.org/7.3/overview/timeline/#random-orders-of-trials">randomization</a> a bit simpler. If we did want to randomize the order, we would simply add the `randomize_order` parameter and set it to `true`, as below. There are other settings you can play around with including things like running through the trials multiple times, sampling trials with replacement, etc.
+
+``` javascript
+const trials = {
+    timeline: [
+        {
+            type: jsPsychAudioKeyboardResponse,
+            choices: ['d', 'k'],
+            stimulus: jsPsych.timelineVariable('stimulus'),
+            response_allowed_while_playing: false,
+            trial_duration: 4000,
+            prompt: `<div class=\"option_container\"><div class=\"option\">NEW<br><br><b>D</b></div><div class=\"option\">OLD<br><br><b>K</b></div></div>`,
+            on_finish: function(data) {
+                evaluate_response(data);
+            },
+            data: jsPsych.timelineVariable('data')
+        },
+        {
+            type: jsPsychHtmlKeyboardResponse,
+            choices: [""],
+            stimulus: "",
+            response_ends_trial: false,
+            trial_duration: 1000
+        }
+    ],
+    timeline_variables: [
+        {stimulus: 'audio/Violin.wav', data: {correct: "NEW"}},
+        {stimulus: 'audio/Bologna.wav', data: {correct: "NEW"}},
+        {stimulus: 'audio/Violin.wav', data: {correct: "OLD"}},
+        {stimulus: 'audio/Bologna.wav', data: {correct: "OLD"}}
+    ],
+    randomize_order: true
+}
+timeline.push(trials)
+```
+
+<!-- ### Creating trials from a CSV
+Using timeline variables is a huge improvement from hard coding trials, but so far, we're still required to enter all the details manually, which is burdensome and makes the experiment difficult to modify and prone to errors. 
+
+A common solution is create a CSV with necessary information about all the trials and process that generate trial objects automatically. To do this, it's common to use JSON formant (Javascript Object Notation).  -->
+
+
