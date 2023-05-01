@@ -29,6 +29,9 @@ nav_order: 6
         10. [Surveys](#surveys)
         11. [Wrapping up](#wrapping-up)
 3. [Creating an experiment at scale](#creating-an-experiment-at-scale)
+    1. [Repeating procedures](#repeating-procedures)
+    2. [Creating trials programmatically](#creating-trials-programmatically)
+    3. [Customizing trial order](#customizing-trial-order)
 
 
 ## Getting started
@@ -805,9 +808,151 @@ const trials = {
 timeline.push(trials)
 ```
 
-<!-- ### Creating trials from a CSV
+### Creating trials programmatically
 Using timeline variables is a huge improvement from hard coding trials, but so far, we're still required to enter all the details manually, which is burdensome and makes the experiment difficult to modify and prone to errors. 
 
-A common solution is create a CSV with necessary information about all the trials and process that generate trial objects automatically. To do this, it's common to use JSON formant (Javascript Object Notation).  -->
+A common solution is create a CSV with necessary information about all the trials, run some script to convert its contents into a JavaScript object, and then process that file within your web app to mold it into the shape your experiment requires. 
 
+We won't get into the first step here (converting CSV to JSON), but this can generally be done fairly simply with a short Python script. More on that <a href="https://www.geeksforgeeks.org/convert-csv-to-json-using-python/">here</a>, <a href="https://www.askpython.com/python/examples/convert-csv-to-json">here</a>, and <a href="https://pythonexamples.org/python-csv-to-json/">here</a>. The goal of this stage is to create an object that can be read into our JS script when the website loads to flexibly define the trials. To simulate this, we can create a new file called `trials.js` that looks like:
 
+``` javascript
+let trial_objects = [
+    {
+        "stimulus": "audio/Violin.wav",
+        "correct": "NEW"
+    },
+    {
+        "stimulus": "audio/Bologna.wav",
+        "correct": "NEW"
+    },
+    {
+        "stimulus": "audio/Violin.wav",
+        "correct": "OLD"
+    },
+    {
+        "stimulus": "audio/Bologna.wav",
+        "correct": "OLD"
+    }
+]
+```
+
+Now, if we add the line `<script src="trials.js"></script>` to the head of the HTML file (**above** the line that loads `experiment.js`!), we will have access to the `trial_objects` object, which contains a JSON-formatted representation of all our trials. To turn that into the format required for our `timeline_variable` array, let's add a new function to the `util.js` file. 
+
+``` javascript
+function create_tv_array(json_object) {
+    let tv_array = [];
+    for (let i = 0; i < json_object.length; i++) {
+        obj = {};
+        obj.stimulus = json_object[i].stimulus;
+        obj.data = {};
+        obj.data.correct = json_object[i].correct;
+        tv_array.push(obj)
+    }
+    return tv_array;
+}
+```
+
+For any experiment you build, a function like this will need to be customized to fit your stimuli, but this general format will work in most cases. All we need to do now is call this function in the `experiment.js` file, assign the return value to some variable, and then feed that variable to the `timeline_variables` parameter in our `trials` definition. That whole thing could look like:
+
+``` javascript
+let tv_array = create_tv_array(trial_objects);
+const trials = {
+    timeline: [
+        {
+            type: jsPsychAudioKeyboardResponse,
+            choices: ['d', 'k'],
+            stimulus: jsPsych.timelineVariable('stimulus'),
+            response_allowed_while_playing: false,
+            trial_duration: 4000,
+            prompt: `<div class=\"option_container\"><div class=\"option\">NEW<br><br><b>D</b></div><div class=\"option\">OLD<br><br><b>K</b></div></div>`,
+            on_finish: function(data) {
+                evaluate_response(data);
+            },
+            data: jsPsych.timelineVariable('data')
+        },
+        {
+            type: jsPsychHtmlKeyboardResponse,
+            choices: [""],
+            stimulus: "",
+            response_ends_trial: false,
+            trial_duration: 1000
+        }
+    ],
+    timeline_variables: tv_array,
+    randomize_order: true
+}
+timeline.push(trials);
+```
+
+### Customizing trial order
+For many experiment, a fully random trial order is sufficient, but in many cases, the researcher needs control over what happens when. Incidentally, continuous recognition memory is a good example of a paradigm that requires such control. In our case, if we fully randomize trial order, it's totally possible that stimuli coded as `OLD` will precede stimuli coded ans `NEW`, which would really mess up our data.
+
+A solution is to write another helper function in the `util.js` file that can handle trial ordering. The details of your pseudorandomization function will vary widely based on the specifics of what your experiment calls for, so the best thing to do here is get creative! In our case, we just need a function to make sure that all `NEW` trials precede their `OLD` counterparts. 
+
+One way to do this would be to randomize the order of the array that holds the trial objects, then iterate through while logging each stimulus word in a separate array. If the word is not in that array yet, we'll make sure its value is `NEW` and add it to the array. If it's already in the array, we make sure its value is `OLD` and move on. The first thing we'll need is a function to shuffle the array. Oddly, such a function is not default in JavaScript, but it's straightforward to implement one. Here's a function we can add to the `util.js` file that will randomize an array. 
+
+``` javascript
+function shuffle_array(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+```
+
+Now we can define a function called `set_trial_order` that iterates through the randomized list and makes sure all the `NEW` words precede `OLD` words:
+
+``` javascript
+function set_trial_order(trial_array) {
+    trial_array = shuffle_array(trial_array);
+    let used_words = [];
+    for (let i = 0; i < trial_array.length; i++) {
+        if (used_words.includes(trial_array[i].stimulus)) {
+            trial_array[i].data.correct = "OLD";
+        } else {
+            trial_array[i].data.correct = "NEW";
+            used_words.push(trial_array[i].stimulus);
+        }
+    }
+    return trial_array;
+}
+```
+
+Now, if we call this function on `tv_array` in `experiment.js` right before we define our `trials` object, we'll generate a trial order that correctly characterizes stimuli! In most cases, writing a bespoke function in the `util.js` file and applying that to your list of trials will be the easiest way to generate a pseudorandom trial order. 
+
+However, jsPsych also has a built-in mechanism to allow for <a href="https://www.jspsych.org/7.3/overview/timeline/#custom-sampling-function">custom trial orders</a>. This approach generally works best when the properties of the pseudorandom ordering are relatively simple. To use this functionality, set your `trials` definition's parameter `sample` to an object with the parameters `type: 'custom'` and `fn: function() {....}`, where the function returns your desired trial order as an array of indices corresponding to the trials defined in your `tv_array`. So if we wanted (for some reason) to produce the first, third, second, then fourth trial, we could do something like:
+
+``` javascript
+const trials = {
+    ...
+    ...,
+    timeline_variables: tv_array,
+    sample: {
+        type: 'custom',
+        fn: function() {
+            return [0,2,1,3]
+        }
+    }
+}
+timeline.push(trials)
+```
+
+We can also pass the anonymous function the variable `t` to make explicit reference to the `tv_array` we provided. So if we want that array to appear in reversed order and don't want to reference the indices explicitly, we could do something like:
+
+``` javascript
+const trials = {
+    ...
+    ...,
+    timeline_variables: tv_array,
+    sample: {
+        type: 'custom',
+        fn: function(t) {
+            return t.reverse()
+        }
+    }
+}
+timeline.push(trials)
+```
+
+So, to sum up this section, implementations of pseudorandom trial orders vary widely, but will generally use either a helper function defined in your `util.js` file or some kind of custom function given to the `sample` parameter. Which option is best for your experiment will depend on the specific design. 
