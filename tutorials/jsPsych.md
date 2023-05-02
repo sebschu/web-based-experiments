@@ -32,6 +32,7 @@ nav_order: 6
     1. [Repeating procedures](#repeating-procedures)
     2. [Creating trials programmatically](#creating-trials-programmatically)
     3. [Customizing trial order](#customizing-trial-order)
+4. [Integrating with Proliferate](#integrating-with-proliferate)
 
 
 ## Getting started
@@ -956,3 +957,45 @@ timeline.push(trials)
 ```
 
 So, to sum up this section, implementations of pseudorandom trial orders vary widely, but will generally use either a helper function defined in your `util.js` file or some kind of custom function given to the `sample` parameter. Which option is best for your experiment will depend on the specific design. 
+
+### Integrating with Proliferate
+
+Fortunately, integrating your experiment with Proliferate is pretty straightforward, and only requires a couple changes. You can read about this in more detail <a href="https://docs.proliferate.alps.science/en/latest/javascript-library.html">here</a>.
+
+The first thing to do is to load the jQuery library (a dependency of proliferate), along with proliferate itself. In the `head` of your HTML file, add these lines:
+
+``` html
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Proliferate -->
+<script src="https://proliferate.alps.science/static/js/proliferate.js" type="text/javascript"></script>
+```
+
+Because your own .js files depend on these libraries, make sure the links are inserted **before** your `experiment.js` link.
+
+The data is transmitted using the `on_finish` parameter of the `initJsPsych()` function. This is the same parameter we were using above to glimpse the data during debugging. Just change that function to:
+
+``` javascript
+jsPsych = initJsPsych({
+    on_finish: function(data) {
+        proliferate.submit({"trials": data.values()});
+    }
+});
+```
+
+Now, you're ready to deploy your experiment and test it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
