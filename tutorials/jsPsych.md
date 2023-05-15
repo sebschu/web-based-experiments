@@ -32,6 +32,7 @@ nav_order: 6
     1. [Repeating procedures](#repeating-procedures)
     2. [Creating trials programmatically](#creating-trials-programmatically)
     3. [Customizing trial order](#customizing-trial-order)
+    4. [Adding a progress bar](#adding-a-progress-bar)
 4. [Integrating with Proliferate](#integrating-with-proliferate)
 
 
@@ -958,7 +959,53 @@ timeline.push(trials)
 
 So, to sum up this section, implementations of pseudorandom trial orders vary widely, but will generally use either a helper function defined in your `util.js` file or some kind of custom function given to the `sample` parameter. Which option is best for your experiment will depend on the specific design. 
 
-### Integrating with Proliferate
+### Adding a progress bar
+
+It's a good idea to include a progress bar in your experiment, so that participants have a sense of how much they've completed and how far they still have to go. JsPsych has a built-in progress bar, which can be set automatically or manually. The default behavior is for the progress bar to update automatically. To include the automatic progress bar, just go to the line where you initialize jsPsych and set the `show_progress_bar` parameter to `true`:
+
+``` javascript
+const jsPsych = initJsPsych({
+    show_progress_bar: true
+  });
+```
+
+This will often work just fine, but if you're using timeline variables and nested timelines, you will run into problems. That's because the automatic progress bar calculates the total number of trials as the length of the `timeline`. If you're using timeline variables, then the entire body of the experiment (the set of repeated procedures) only counts as one trial on the progress bar, which is not ideal.
+
+For this reason it's often better to manually update the progress bar. Fortunately, that's not too difficult. To override the automatic updates, add `auto_update_progress_bar: false` to `initJsPsych()`:
+
+``` javascript
+const jsPsych = initJsPsych({
+    show_progress_bar: true,
+    auto_update_progress_bar: false
+  });
+```
+
+Now we have to tell the progress bar when to update, and how. This can be done with the method `setProgressBar()`, which takes one numeric argument between 0 and 1. This number represents how 'full' the progress bar should be. A good place to set this number is in the `on_finish` parameter of each trial. We can calculate the true progress by taking the current trial index minus 1 and dividing by the length of the timeline plus the length of the timeline variables array. We can pass that equation as the argument to the `setProgressBar()` method. (This equation assumes that one array of timeline variables is repeated only once. The specific equation may change based on the structure of your experiment.)
+
+If we add that to our definition of the experiment body, we wind up with:
+
+``` javascript
+const trials = {
+    timeline: [
+        {
+            type: jsPsychAudioKeyboardResponse,
+            ...
+        },
+        {
+            type: jsPsychHtmlKeyboardResponse,
+            ...
+            on_finish: function(data) {
+                jsPsych.setProgressBar((data.trial_index - 1) / (timeline.length + tv_array.length))
+            }
+        }
+    ],
+    timeline_variables: tv_array,
+}
+```
+
+Now, the progress bar will update automatically whenever the ITI trial finishes. However, if the `setProgressBar()` method isn't called, the progress bar won't update. That means that if we also want the progress bar to update when participants, for example, click through pages of instructions, we just need to add the same `on_finish` parameter to those trials as well.  
+
+## Integrating with Proliferate
 
 Fortunately, integrating your experiment with Proliferate is pretty straightforward, and only requires a couple changes. You can read about this in more detail <a href="https://docs.proliferate.alps.science/en/latest/javascript-library.html">here</a>.
 
